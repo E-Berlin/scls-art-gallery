@@ -1,0 +1,56 @@
+/* components/AnimatedButton.css */
+.animated-button-wrapper {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    animation: fadeSlideIn 0.5s cubic-bezier(.22, .9, .26, 1) forwards;
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animated-button {
+    width: 100%;
+    /* 撑满 login-container */
+    display: block;
+    margin: 20px auto;
+    /* 上下间距 + 水平居中 */
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+    margin: 0 auto;
+    /* 外边距左右自动，块级元素才生效 */
+}
+
+/* 鼠标悬停：浮起 + 放大 */
+.animated-button:not(.disabled):not(.loading):hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* 按下：挤压 + 高光 */
+.animated-button:not(.disabled):not(.loading):active {
+    transform: translateY(2px) scale(0.95);
+}
+
+/* 禁用状态 */
+.animated-button.disabled,
+.animated-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: translateY(0) scale(1);
+    /* 禁用状态不漂浮 */
+    box-shadow: none;
+}
+
+/* Loading 状态 */
+.animated-button.loading {
+    cursor: wait;
+}

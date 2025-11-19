@@ -1,0 +1,757 @@
+/* pages/UploadPage.css */
+.upload-page {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #fff;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.upload-scroll-container {
+    margin-top: 60px;
+    width: 100%;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.background-container {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.background-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.2);
+    transform-origin: 50% 50%;
+    animation: upload-bgZoomFadeIn 1.5s ease forwards;
+}
+
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.9) 100%);
+    pointer-events: none;
+}
+
+.upload-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 500px;
+    min-height: min-content;
+    z-index: 1;
+    animation: upload-popupIn 0.6s ease-out forwards;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    margin-bottom: 20px;
+}
+
+/* 消息样式 - 与ProfilePage相同 */
+.upload-message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: messageSlideIn 0.3s ease-out;
+}
+
+.upload-success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4caf50;
+    color: #a5d6a7;
+}
+
+.upload-error {
+    background: rgba(229, 57, 53, 0.2);
+    border: 1px solid #e53935;
+    color: #ff8a80;
+}
+
+/* 确认对话框样式 */
+.upload-confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.upload-confirm-content {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(76, 175, 80, 0.5);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: upload-popupIn 0.3s ease;
+}
+
+.upload-confirm-content h3 {
+    color: #4caf50;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.upload-confirm-content p {
+    color: #b0b0b0;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.upload-confirm-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.upload-confirm-cancel,
+.upload-confirm-clear {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.upload-confirm-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.upload-confirm-cancel:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.upload-confirm-clear {
+    background: rgba(229, 57, 53, 0.2);
+    color: #ff8a80;
+    border: 1px solid #e53935;
+}
+
+.upload-confirm-clear:hover {
+    background: rgba(229, 57, 53, 0.3);
+}
+
+/* 顶部图片上传区域 */
+.upload-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.upload-image-section {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.upload-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 3px solid #4caf50;
+    transition: all 0.3s ease;
+    animation: upload-logoBreath 3s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.upload-image-wrapper:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+}
+
+.upload-image-wrapper:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.upload-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.upload-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #4caf50;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.upload-image-wrapper:hover .upload-image-overlay:not(:disabled) {
+    opacity: 1;
+}
+
+.upload-image-wrapper:hover .upload-preview:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #b0b0b0;
+    text-align: center;
+    padding: 40px;
+}
+
+.upload-placeholder-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+}
+
+.upload-placeholder-text {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.upload-placeholder-subtext {
+    font-size: 14px;
+    color: #b0b0b0;
+}
+
+/* 隐藏文件输入 */
+.upload-file-input {
+    display: none !important;
+}
+
+/* 状态信息 - 模仿ProfilePage的统计信息 */
+.upload-status-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.upload-status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.upload-status-label {
+    font-size: 14px;
+    color: #b0b0b0;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.upload-status-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4caf50;
+}
+
+/* 表单区域 */
+.upload-form-section {
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+}
+
+.upload-section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.upload-form-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.upload-form-item-description {
+    align-items: flex-start;
+}
+
+.upload-form-label {
+    font-size: 15px;
+    color: #b0b0b0;
+    font-weight: 500;
+    flex: 1;
+    min-width: 120px;
+    padding-top: 8px;
+}
+
+.upload-form-value {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+}
+
+/* 表单控件样式 */
+.upload-form-input,
+.upload-form-textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* 完全重写下拉菜单样式 - 修复箭头问题 */
+.upload-form-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.upload-form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 6px;
+    padding: 10px 40px 10px 12px;
+    /* 右侧留出箭头空间 */
+    color: #fff;
+    font-size: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+    position: relative;
+    cursor: pointer;
+}
+
+/* 使用伪元素创建自定义箭头 */
+.upload-form-select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4caf50;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+/* 当下拉菜单展开时旋转箭头 */
+.upload-form-select:focus {
+    outline: none;
+    border-color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.upload-form-select:focus+.upload-form-select-wrapper::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* 移除所有浏览器默认箭头 */
+.upload-form-select::-ms-expand {
+    display: none;
+}
+
+/* Firefox 特殊处理 */
+@-moz-document url-prefix() {
+    .upload-form-select {
+        text-indent: 0.01px;
+        text-overflow: '';
+        padding-right: 40px;
+    }
+}
+
+/* Internet Explorer 10+ 特殊处理 */
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+    .upload-form-select {
+        padding-right: 40px;
+    }
+
+    .upload-form-select-wrapper::after {
+        display: none;
+    }
+}
+
+/* 确保下拉菜单选项使用暗色主题 */
+.upload-form-select option {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 12px;
+    border: none;
+}
+
+.upload-form-select:focus option {
+    background: #2d2d2d;
+}
+
+.upload-form-select option:checked {
+    background: #4caf50;
+    color: #fff;
+}
+
+.upload-form-input:focus,
+.upload-form-textarea:focus {
+    outline: none;
+    border-color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.upload-form-input::placeholder,
+.upload-form-textarea::placeholder {
+    color: #888;
+}
+
+.upload-form-input-readonly {
+    background: rgba(255, 255, 255, 0.05);
+    color: #b0b0b0;
+    cursor: not-allowed;
+}
+
+.upload-form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.upload-form-counter {
+    text-align: right;
+    font-size: 12px;
+    color: #a0aec0;
+    margin-top: 4px;
+    width: 100%;
+}
+
+/* 按钮区域 - 完全使用LoginPage的按钮样式 */
+.upload-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 按钮行布局 - 修复宽度问题 */
+.upload-actions-row {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+/* 计算两个secondary按钮的宽度，确保它们合起来等于submit按钮的宽度 */
+.upload-actions-row .animated-button-wrapper {
+    flex: 1;
+    min-width: 0;
+    /* 防止内容溢出 */
+}
+
+/* 主要提交按钮 */
+.upload-actions .animated-button-wrapper:not(.upload-actions-row .animated-button-wrapper) {
+    width: 100%;
+}
+
+/* 完全使用LoginPage的按钮样式 */
+.upload-actions .animated-button-wrapper {
+    margin: 0;
+    opacity: 0;
+    animation: fadeSlideIn 0.5s cubic-bezier(.22, .9, .26, 1) forwards;
+}
+
+.upload-actions .animated-button {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* 鼠标悬停：浮起 + 放大 + 绿色阴影 */
+.upload-actions .animated-button:not(:disabled):hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 255, 128, 0.5);
+}
+
+/* 按下：挤压 + 高光 */
+.upload-actions .animated-button:not(:disabled):active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 4px 6px rgba(0, 255, 128, 0.3);
+    background-color: #45a049;
+}
+
+/* 禁用状态 */
+.upload-actions .animated-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: translateY(0) scale(1);
+    box-shadow: none;
+}
+
+/* 移除焦点样式，与LoginPage保持一致 */
+.upload-actions .animated-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 为不同按钮设置不同的动画延迟 */
+.upload-actions-row .animated-button-wrapper:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.upload-actions-row .animated-button-wrapper:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.upload-actions .animated-button-wrapper:not(.upload-actions-row .animated-button-wrapper) {
+    animation-delay: 0.3s;
+}
+
+/* 动画 */
+@keyframes upload-bgZoomFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1.2);
+        filter: brightness(0.3);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+@keyframes upload-popupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes upload-logoBreath {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
+    }
+}
+
+@keyframes messageSlideIn {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .upload-scroll-container {
+        padding: 10px;
+        margin-top: 60px;
+    }
+
+    .upload-container {
+        padding: 30px 20px;
+        margin: 0;
+    }
+
+    .upload-image-wrapper {
+        height: 250px;
+    }
+
+    .upload-placeholder-icon {
+        font-size: 48px;
+    }
+
+    .upload-placeholder-text {
+        font-size: 18px;
+    }
+
+    .upload-status-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .upload-form-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .upload-form-label,
+    .upload-form-value {
+        text-align: left;
+        width: 100%;
+    }
+
+    .upload-actions {
+        gap: 12px;
+    }
+
+    .upload-actions-row {
+        flex-direction: column;
+    }
+
+    .upload-confirm-content {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .upload-confirm-actions {
+        flex-direction: column;
+    }
+}
+
+/* 自定义滚动条样式 */
+.upload-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.upload-scroll-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.upload-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(76, 175, 80, 0.5);
+    border-radius: 4px;
+}
+
+.upload-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(76, 175, 80, 0.7);
+}
+
+/* 移除所有按钮的焦点轮廓 */
+.upload-actions .animated-button:focus,
+.upload-confirm-cancel:focus,
+.upload-confirm-clear:focus,
+.upload-nav-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 为可访问性保留键盘导航的焦点样式，但不显示白框 */
+.upload-actions .animated-button:focus-visible,
+.upload-confirm-cancel:focus-visible,
+.upload-confirm-clear:focus-visible,
+.upload-nav-button:focus-visible {
+    outline: 2px solid #4caf50 !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* 文件输入按钮也需要移除焦点轮廓 */
+.upload-file-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}

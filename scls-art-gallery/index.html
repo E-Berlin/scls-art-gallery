@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scls-art-gallery</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx">
+    window.addEventListener('error', function (e) {
+      // 忽略 reasonlabsapi 相关的错误
+      if (e.message.includes('reasonlabsapi') ||
+        e.filename.includes('reasonlabsapi')) {
+        e.preventDefault();
+        console.log('Ignored reasonlabsapi error');
+        return true;
+      }
+    });
+  </script>
+</body>
+
+</html>

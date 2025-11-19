@@ -1,0 +1,142 @@
+/* pages/CollectionPage.css */
+.collection-page {
+    width: 100vw;
+    min-height: 100vh;
+    background: #000;
+    padding: 100px 140px 140px;
+    /* 上下左右间距 */
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* 超出高度自动滚动 */
+}
+
+.collection-title {
+    text-align: center;
+    font-size: 60px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列 */
+    gap: 40px 60px;
+    /* 上下间距40px，左右间距30px */
+    justify-items: center;
+    /* 卡片居中 */
+}
+
+.artwork-card {
+    position: relative;
+    background: #111;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
+    aspect-ratio: 3 / 4;
+    /* 👈 改为3:4 */
+    display: flex;
+    flex-direction: column;
+}
+
+.artwork-card:hover .image-wrapper img {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: box-shadow 0.6s ease;
+}
+
+.image-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 4px;
+    /* 跟随卡片圆角 */
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    /* 半透明边框 */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) inset;
+    /* 内阴影增加厚度感 */
+    transition: border-color 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    z-index: 3;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1s ease;
+}
+
+/* hover overlay */
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    /* 初始透明 */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: background 0.6s ease, opacity 0.6s ease;
+    cursor: pointer;
+}
+
+.hover-overlay-text {
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* hover 效果 */
+.image-wrapper:hover .hover-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    /* 图片变暗 */
+    opacity: 1;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.05);
+    /* 轻微放大 */
+}
+
+.image-wrapper:hover::after {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card-footer {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.card-footer .title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.card-footer .artist {
+    font-size: 1.1rem;
+    color: #aaaaaa;
+}

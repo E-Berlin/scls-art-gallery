@@ -1,0 +1,690 @@
+/* pages/drawGuess/CreateRoom.css */
+.create-room-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.create-room-container {
+    background: black;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    color: white;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: createRoomPopupIn 0.6s ease-out forwards;
+}
+
+.create-room-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+/* 🔥 新增：难度系数信息样式 - 保持黑色主题 */
+.create-room-difficulty-info {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.create-room-difficulty-info:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #4caf50;
+}
+
+.create-room-difficulty-text {
+    color: white;
+    font-size: 1.1em;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.create-room-difficulty-note {
+    color: #888;
+    font-size: 0.9em;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.create-room-difficulty-info:hover .create-room-difficulty-note {
+    color: #4caf50;
+}
+
+.create-room-themes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列 */
+    grid-template-rows: repeat(2, 1fr);
+    /* 2行 */
+    gap: 12px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.create-room-theme-button {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-break: break-word;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    animation: createRoomThemeButtonIn 0.6s ease forwards;
+}
+
+/* 🔥 新增：难度系数徽章样式 */
+.create-room-difficulty-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #ff6b6b;
+    color: white;
+    font-size: 0.65em;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3);
+    line-height: 1;
+    z-index: 2;
+}
+
+.create-room-theme-active .create-room-difficulty-badge {
+    background: #ffd93d;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(255, 217, 61, 0.4);
+}
+
+/* 为主题按钮添加不同的动画延迟 */
+.create-room-theme-button:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.create-room-theme-button:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.create-room-theme-button:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.create-room-theme-button:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.create-room-theme-button:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.create-room-theme-button:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+.create-room-theme-button:nth-child(7) {
+    animation-delay: 0.4s;
+}
+
+.create-room-theme-button:nth-child(8) {
+    animation-delay: 0.45s;
+}
+
+/* 修复：确保悬停和选中状态的transform优先级更高，并添加平滑过渡 */
+.create-room-theme-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #4caf50;
+    transform: translateY(-4px) scale(1.05) !important;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.create-room-theme-active {
+    background: rgba(76, 175, 80, 0.2) !important;
+    border-color: #4caf50 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    /* 弹跳效果 */
+}
+
+.create-room-theme-active:hover {
+    transform: translateY(-4px) scale(1.1) !important;
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.5);
+}
+
+.create-room-theme-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 自定义词条区域 */
+.create-room-custom-words-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.create-room-custom-words-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.create-room-words-scroll-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.create-room-words-list {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-room-word-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.create-room-word-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #000;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.create-room-word-input::placeholder {
+    color: #888;
+}
+
+.create-room-word-input:focus {
+    border-color: #4caf50;
+    background: #1a1a1a;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    transform: scale(1.02);
+}
+
+.create-room-remove-word-button {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    border: 1px solid #f44336;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.create-room-remove-word-button:hover {
+    background: rgba(244, 67, 54, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.create-room-remove-word-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.create-room-add-word-button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    width: 100%;
+}
+
+.create-room-add-word-button:hover {
+    background: #66bb6a;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+}
+
+.create-room-add-word-button:active {
+    transform: translateY(-1px);
+}
+
+.create-room-add-word-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.create-room-add-word-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 设置区域 */
+.create-room-settings {
+    margin-bottom: 30px;
+}
+
+.create-room-setting {
+    margin-bottom: 25px;
+}
+
+.create-room-setting-label {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* 人数滑块样式 */
+.create-room-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #4caf50 0%, #4caf50 var(--slider-progress, 50%), #333 var(--slider-progress, 50%), #333 100%);
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.create-room-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #4caf50;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    border: 2px solid white;
+}
+
+.create-room-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #66bb6a;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 1);
+}
+
+.create-room-slider::-webkit-slider-thumb:active {
+    transform: scale(1.3);
+}
+
+.create-room-slider::-webkit-slider-thumb:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 1);
+}
+
+/* 房间类型切换开关 - 修复背景颜色 */
+.create-room-toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.create-room-toggle-option {
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    text-align: center;
+}
+
+.create-room-toggle-active {
+    color: #4caf50;
+    font-weight: 600;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.create-room-toggle-slider {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: #4caf50;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.create-room-toggle-slider:hover {
+    background: #66bb6a;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+}
+
+.create-room-toggle-slider:active {
+    transform: scale(0.95);
+}
+
+.create-room-toggle-knob {
+    position: absolute;
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 弹跳效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.create-room-toggle-public {
+    left: 3px;
+}
+
+.create-room-toggle-private {
+    left: calc(100% - 27px);
+}
+
+.create-room-toggle-slider:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+/* 操作按钮 */
+.create-room-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.create-room-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    min-width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.create-room-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.create-room-button:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.create-room-primary-button {
+    background: #4caf50;
+    color: white;
+}
+
+.create-room-primary-button:hover:not(:disabled) {
+    background: #66bb6a;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+.create-room-primary-button:active:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+.create-room-primary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.create-room-secondary-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #333;
+}
+
+.create-room-secondary-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.create-room-secondary-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+}
+
+.create-room-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.create-room-note {
+    color: #888;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+/* 动画定义 */
+@keyframes createRoomPopupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes createRoomThemeButtonIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    80% {
+        transform: translateY(2px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 滚动条样式 */
+.create-room-words-scroll-container::-webkit-scrollbar {
+    width: 6px;
+    transition: all 0.3s ease;
+}
+
+.create-room-words-scroll-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 0 6px 6px 0;
+}
+
+.create-room-words-scroll-container::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.create-room-words-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #66bb6a;
+    transform: scale(1.1);
+}
+
+.create-room-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.create-room-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 0 12px 12px 0;
+}
+
+.create-room-container::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.create-room-container::-webkit-scrollbar-thumb:hover {
+    background: #66bb6a;
+}
+
+/* 在 CreateRoom.css 中添加 */
+.create-room-validation-error {
+    color: #ff4757;
+    font-size: 0.9em;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.create-room-minimum-note {
+    color: #ffa502;
+    font-size: 0.85em;
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.create-room-word-input:invalid {
+    border-color: #ff4757;
+}
+
+.create-room-primary-button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .create-room-container {
+        padding: 30px 20px;
+        max-height: 85vh;
+    }
+
+    .create-room-themes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .create-room-theme-button {
+        padding: 10px 6px;
+        font-size: 12px;
+        min-height: 50px;
+    }
+
+    .create-room-actions {
+        flex-direction: column;
+    }
+
+    .create-room-button {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .create-room-toggle-switch {
+        gap: 10px;
+    }
+
+    .create-room-toggle-option {
+        min-width: 70px;
+        font-size: 13px;
+    }
+
+    /* 🔥 移动端调整难度徽章大小 */
+    .create-room-difficulty-badge {
+        font-size: 0.6em;
+        padding: 1px 4px;
+        top: 4px;
+        right: 4px;
+    }
+}

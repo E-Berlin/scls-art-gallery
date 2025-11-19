@@ -1,0 +1,233 @@
+/* pages/CollectiveCanvasPage.css */
+.collective-canvas-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: rgb(45, 45, 45);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sidebar */
+.collective-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100%;
+    background-color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 按钮容器（边栏内部） */
+.collective-sidebar-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 100px;
+    background-color: white;
+    color: black;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    z-index: 25;
+    transition: all 0.25s ease;
+}
+
+.collective-sidebar-btn.closed {
+    right: -40px;
+    background-color: black;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    /* 收起时略微向右 */
+}
+
+.collective-sidebar-btn:hover {
+    color: black;
+    background-color: #d1d1d1;
+}
+
+/* Sidebar 内容 */
+.collective-sidebar-content {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+.collective-sidebar-title {
+    margin-top: 80px;
+    color: white;
+    text-align: left;
+    font-size: 50px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+/* 🎨 通用图标按钮风格 */
+.collective-icon-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.25s ease;
+    padding: 8px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    outline: none;
+    /* 去除点击后的外边框 */
+}
+
+.collective-icon-btn:hover {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.4));
+    outline: none;
+    /* 取消点击/聚焦边框 */
+}
+
+.collective-icon-btn.active {
+    transform: scale(1.4);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+    outline: none;
+    box-shadow: none;
+    /* 去除可能的发光描边 */
+}
+
+.collective-icon-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 工具按钮组布局 */
+.collective-tool-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.collective-sidebar-content input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background: #000;
+    cursor: pointer;
+}
+
+.collective-sidebar-content input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, var(--slider-color, #00ffff) 0%, var(--slider-color, #00ffff) var(--range-percent, 50%), #222 var(--range-percent, 50%), #222 100%);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    transition: background 0.2s ease;
+}
+
+/* 滑块（拇指） */
+.collective-sidebar-content input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transition: all 0.2s ease;
+}
+
+/* brush-preview 相关样式 */
+
+.collective-brush-preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    height: 120px;
+    /* 确保有足够空间显示大号画笔 */
+    border: 1px solid #333;
+    border-radius: 4px;
+    background:
+        repeating-conic-gradient(#ddd 0% 25%, #fff 0% 50%) 50% / 10px 10px;
+    /* 添加棋盘格背景，更好看清半透明颜色 */
+}
+
+.collective-brush-preview {
+    border-radius: 50%;
+    background-color: currentColor;
+    border: 1px solid #555;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    /* 确保预览居中 */
+    margin: 0 auto;
+}
+
+/* Zoom 控件 */
+.collective-zoom-controls {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.collective-zoom-controls:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 在线人数 */
+.collective-online-count {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.8;
+}
+
+/* Canvas */
+.collective-canvas-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collective-canvas-container.pan {
+    cursor: grab;
+}
+
+.collective-canvas-container.pan:active {
+    cursor: grabbing;
+}
+
+.collective-canvas-container canvas {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #f9f9f9;
+    transform-origin: 0 0;
+    image-rendering: pixelated;
+    /* 让缩放时保持清晰，不模糊 */
+}

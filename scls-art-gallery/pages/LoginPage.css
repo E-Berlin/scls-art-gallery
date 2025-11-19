@@ -1,0 +1,296 @@
+/* pages/LoginPage.css */
+.login-page {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #000;
+}
+
+/* 背景建筑 + 渐变蒙版 */
+.background-container {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.background-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.2);
+    /* 设置缩放中心为校徽位置 */
+    transform-origin: 50% 150px;
+    /* 50% 横向居中, 150px 垂直距离到校徽中心 */
+    animation: bgZoomFadeIn 1.5s ease forwards;
+}
+
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.8) 0%,
+            /* 顶部深 */
+            rgba(0, 0, 0, 0.5) 50%,
+            /* 中间淡 */
+            rgba(0, 0, 0, 0.8) 100%
+            /* 底部深 */
+        );
+    pointer-events: none;
+    /*opacity: 0;
+    animation: backgroundFadeInDown 1.2s ease-in-out forwards;*/
+}
+
+.login-container {
+    position: relative;
+    background: #000;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 360px;
+    z-index: 1;
+    animation: popupIn 0.6s ease-out forwards;
+}
+
+.login-title {
+    margin-top: auto;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.login-error {
+    color: #e53935;
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-success {
+    color: #4caf50;
+    margin-bottom: 12px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #fff;
+    color: #000;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.login-input::placeholder {
+    color: #888;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #4caf50;
+    background: #e8f5e9;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.animated-button {
+    width: 100%;
+    /* 撑满 login-container */
+    display: block;
+    margin: 20px auto;
+    /* 上下间距 + 水平居中 */
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+    margin: 0 auto;
+    /* 外边距左右自动，块级元素才生效 */
+}
+
+/* 鼠标悬停：浮起 + 放大 */
+.animated-button:not(:disabled):hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 255, 128, 0.5);
+}
+
+/* 按下：挤压 + 高光 */
+.animated-button:not(:disabled):active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 4px 6px rgba(0, 255, 128, 0.3);
+    background-color: #45a049;
+}
+
+.animated-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.animated-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.login-footer {
+    margin-top: 18px;
+    font-size: 14px;
+    text-align: center;
+    color: #b0b0b0;
+}
+
+.login-link {
+    color: #388e3c;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.login-link:hover {
+    color: #4caf50;
+    font-size: 16px;
+    text-decoration: none;
+    outline: none;
+}
+
+.login-link:active {
+    color: #2e7d32;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
+}
+
+.login-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.home-page-link {
+    color: #388e3c;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.home-page-link:hover {
+    color: #4caf50;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.home-page-link:active {
+    color: #2e7d32;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
+}
+
+.home-page-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 爆弹入动画 */
+@keyframes popupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- 新动画：每个子元素用自己的动画名，forwards 保持最终状态 ---------- */
+@keyframes fadeSlideIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* 子元素初始透明，使用 fadeSlideIn，并且 forwards 保持最终状态 */
+.login-title,
+.login-input,
+.login-button,
+.login-footer {
+    opacity: 0;
+    animation-name: fadeSlideIn;
+    animation-duration: 0.58s;
+    animation-timing-function: cubic-bezier(.22, .9, .26, 1);
+    animation-fill-mode: forwards;
+    /* 很重要：动画结束后保持最后一帧 */
+}
+
+/* 顺序延迟（根据 DOM 顺序微调） */
+.login-title {
+    animation-delay: 0.08s;
+}
+
+/* 假设输入框是容器中按顺序的 input 元素 —— nth-of-type 作用于相同类型元素 */
+.login-container input.login-input:nth-of-type(1) {
+    animation-delay: 0.18s;
+}
+
+.login-container input.login-input:nth-of-type(2) {
+    animation-delay: 0.24s;
+}
+
+.login-container input.login-input:nth-of-type(3) {
+    animation-delay: 0.30s;
+}
+
+.login-container input.login-input:nth-of-type(4) {
+    animation-delay: 0.36s;
+}
+
+/* 按钮与 footer */
+.login-button {
+    animation-delay: 0.42s;
+}
+
+.login-footer {
+    animation-delay: 0.48s;
+}

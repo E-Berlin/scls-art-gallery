@@ -1,0 +1,352 @@
+/* pages/drawGuess/Lobby.css */
+.lobby-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.lobby-page.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.lobby-loading-message {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    animation: lobbyFadeIn 1.5s ease forwards;
+}
+
+.lobby-container {
+    background: black;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    color: white;
+    max-width: 600px;
+    width: 90%;
+    animation: lobbyPopupIn 0.6s ease-out forwards;
+}
+
+.lobby-header {
+    margin-bottom: 30px;
+}
+
+.lobby-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.lobby-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.lobby-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lobby-copy-button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.lobby-copy-button:hover {
+    background: #66bb6a;
+    transform: scale(1.05);
+}
+
+.lobby-copy-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.lobby-players {
+    margin-bottom: 30px;
+}
+
+.lobby-players-title {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.lobby-player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lobby-player-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.2s ease;
+}
+
+.lobby-player-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(8px);
+}
+
+.lobby-player-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lobby-player-name {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.lobby-waiting-message {
+    color: #888;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.lobby-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.lobby-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.lobby-start-button {
+    background: #4caf50;
+    color: white;
+}
+
+.lobby-start-button:hover:not(.lobby-button-disabled) {
+    background: #66bb6a;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.lobby-start-button:active:not(.lobby-button-disabled) {
+    transform: translateY(-2px);
+}
+
+.lobby-button-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.lobby-leave-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #333;
+}
+
+.lobby-leave-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+.lobby-leave-button:active {
+    transform: translateY(-2px);
+}
+
+.lobby-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.lobby-player-joining {
+    opacity: 0.7;
+    animation: pulse-joining 1.5s infinite;
+}
+
+.lobby-player-joining .lobby-player-avatar {
+    background: rgba(255, 255, 255, 0.1) !important;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 🔥 修复：使用伪元素创建加载动画，确保完美居中 */
+.lobby-player-joining .lobby-player-avatar::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 🔥 或者使用独立的加载容器（推荐） */
+.lobby-loading-avatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lobby-loading-avatar .loading-spinner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    /* 🔥 确保没有外边距影响居中 */
+}
+
+.lobby-delay-notice {
+    color: #ffa500;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+@keyframes pulse-joining {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.lobby-delay-notice {
+    color: #4CAF50;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes lobbyPopupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes lobbyFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lobby-container {
+        padding: 30px 20px;
+    }
+
+    .lobby-info {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .lobby-actions {
+        flex-direction: column;
+    }
+}

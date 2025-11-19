@@ -1,0 +1,446 @@
+/* components/Navbar.css */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.85);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    backdrop-filter: saturate(140%) blur(6px);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+    border-bottom: 1.2px solid rgba(255, 255, 255, 0.15);
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.nav-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: #fff;
+}
+
+.nav-items {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    position: relative;
+}
+
+/* 当前页面高光保持不变 */
+.nav-button.active {
+    color: #00ff88;
+    font-weight: 600;
+    text-shadow: 0 0 2px rgba(0, 255, 136, 0.6);
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 8px;
+}
+
+/* ========== 左侧透明按钮 (nav-items) ========== */
+.nav-items button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: #fff;
+    transition: transform 0.1s ease, color 0.1s ease, text-shadow 0.1s ease;
+    outline: none;
+}
+
+.nav-items button:hover {
+    color: #00c853;
+    text-shadow: 0 0 8px rgba(0, 200, 83, 0.6);
+    transform: translateY(-2px);
+}
+
+.nav-items button:active {
+    transform: translateY(1px) scale(0.95);
+    text-shadow: 0 0 4px rgba(0, 200, 83, 0.3);
+}
+
+.nav-items button:focus,
+.nav-items button:focus-visible {
+    outline: none;
+}
+
+/* ========== 右侧有背景按钮 (nav-right) ========== */
+.nav-right button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(60, 60, 60, 1);
+    /* 使用接近不透明的颜色 */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 100px;
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    /* 添加内阴影创造深度 */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-right button:hover {
+    transform: translateY(-2px);
+    color: #00c853;
+    background: rgba(70, 70, 70, 1);
+    border-color: rgba(0, 200, 83, 0.4);
+    box-shadow:
+        0 6px 10px rgba(0, 200, 83, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-right button:active {
+    transform: translateY(1px) scale(0.95);
+    color: #00c853;
+    background: rgba(70, 70, 70, 1);
+    border-color: rgba(0, 200, 83, 0.4);
+    box-shadow:
+        0 6px 10px rgba(0, 200, 83, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-right button:focus,
+.nav-right button:focus-visible {
+    outline: none;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.user-toggle.active .user-avatar {
+    border-color: #00ff88;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+/* 下拉箭头样式 */
+.chevron {
+    margin-left: 4px;
+    font-size: 14px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chevron.rotate {
+    transform: rotate(180deg);
+}
+
+/* ========== 下拉菜单样式 - 重新设计 ========== */
+.user-menu-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========== 下拉菜单样式 ========== */
+.dropdown-menu {
+    position: fixed;
+    background: rgba(45, 45, 45, 0.98);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 2px solid rgba(60, 60, 60, 0.95);
+    /* 与按钮背景完全匹配 */
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+    z-index: -1;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    /* 确保与按钮无缝连接 */
+    margin-top: -1px;
+    /* 重叠1像素消除缝隙 */
+}
+
+/* 下拉菜单打开动画 - 从按钮中线向下展开 */
+.dropdown-menu.open {
+    animation: dropdownExpand 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 下拉菜单关闭动画 - 向上收缩到按钮中线 */
+.dropdown-menu.close {
+    animation: dropdownCollapse 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dropdown-content {
+    margin-top: 30px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 所有内容居中 */
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 内容居中 */
+    gap: 12px;
+    width: 100%;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    /* 抽屉动画初始状态 - 隐藏在顶部 */
+    opacity: 0;
+    transform: translateY(-100%);
+    max-height: 0;
+    margin-bottom: 0;
+}
+
+/* 抽屉式向下滑入动画 */
+.dropdown-menu.open .dropdown-item {
+    animation: drawerSlideDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.dropdown-menu.close .dropdown-item {
+    animation: drawerSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* 流光效果 */
+.dropdown-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.dropdown-item:hover::before {
+    left: 100%;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #00c853;
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 16px rgba(0, 200, 83, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    margin-bottom: 4px;
+}
+
+.dropdown-item .item-icon {
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover .item-icon {
+    transform: scale(1.2);
+    color: #00ff88;
+}
+
+.dropdown-item.logout {
+    color: #ff6b6b;
+}
+
+.dropdown-item.logout:hover {
+    color: #ff5252;
+    background: rgba(255, 107, 107, 0.15);
+    box-shadow:
+        0 6px 16px rgba(255, 107, 107, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item.logout:hover .item-icon {
+    color: #ff5252;
+}
+
+.dropdown-divider {
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    margin: 8px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown-divider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: shimmer 3s infinite;
+}
+
+/* 动画定义 */
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-70px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 下拉面板从按钮中线向下展开 */
+@keyframes dropdownExpand {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+        max-height: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        max-height: 400px;
+    }
+}
+
+/* 下拉面板向上收缩到按钮中线 */
+@keyframes dropdownCollapse {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+        max-height: 400px;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+        max-height: 0;
+    }
+}
+
+/* 菜单项从上方抽屉式滑下 */
+@keyframes drawerSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+        max-height: 0;
+        margin-bottom: 0;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 60px;
+        margin-bottom: 4px;
+    }
+}
+
+/* 菜单项向上滑出 */
+@keyframes drawerSlideUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 60px;
+        margin-bottom: 4px;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+        max-height: 0;
+        margin-bottom: 0;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-items {
+        gap: 12px;
+    }
+
+    .nav-items button {
+        padding: 8px 16px;
+        font-size: 18px;
+    }
+
+    .nav-right button {
+        padding: 8px 16px;
+        font-size: 18px;
+    }
+
+    .dropdown-content {
+        padding: 8px 6px;
+    }
+
+    .dropdown-item {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    .dropdown-menu {
+        right: 16px;
+    }
+}

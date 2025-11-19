@@ -1,0 +1,214 @@
+/* pages/drawGuess/FinalResult.css */
+.final-result-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.final-result-page.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.final-result-loading-message {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    animation: finalResultFadeIn 1.5s ease forwards;
+}
+
+.final-result-container {
+    background: black;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    width: 90%;
+    animation: finalResultPopupIn 0.6s ease-out forwards;
+}
+
+.final-result-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.final-result-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4caf50, transparent);
+    margin: 25px 0;
+    opacity: 0.6;
+}
+
+.final-result-scoreboard {
+    margin: 30px 0;
+}
+
+.final-result-score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.final-result-score-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.final-result-score-item.final-result-podium {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: #555;
+}
+
+.final-result-score-item:hover {
+    transform: translateX(8px);
+    background: rgba(76, 175, 80, 0.1);
+    border-color: #4caf50;
+}
+
+.final-result-rank {
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 40px;
+    text-align: left;
+}
+
+.final-result-player-name {
+    flex: 1;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.final-result-player-score {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 80px;
+    text-align: right;
+}
+
+.final-result-mvp {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 8px;
+    border: 1px solid #4caf50;
+}
+
+.final-result-mvp p {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.final-result-total-rounds {
+    color: #888;
+    font-size: 16px;
+}
+
+.final-result-actions {
+    margin-top: 20px;
+}
+
+.final-result-back-button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.final-result-back-button:hover {
+    background: #66bb6a;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.final-result-back-button:active {
+    transform: translateY(-2px);
+}
+
+.final-result-back-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.final-result-stats p:last-child {
+    color: #ff6b35;
+    font-weight: bold;
+}
+
+@keyframes finalResultPopupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes finalResultFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .final-result-container {
+        padding: 30px 20px;
+    }
+
+    .final-result-title {
+        font-size: 28px;
+    }
+
+    .final-result-mvp {
+        padding: 16px;
+    }
+
+    .final-result-mvp p {
+        font-size: 16px;
+    }
+}

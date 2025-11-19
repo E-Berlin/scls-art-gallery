@@ -1,0 +1,370 @@
+/* pages/drawGuess/Leaderboard.css */
+.leaderboard-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.leaderboard-container {
+    margin-top: 60px;
+    background: black;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    width: 90%;
+    animation: leaderboardPopupIn 0.6s ease-out forwards;
+    /* 确保容器本身也是flex布局 */
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-title {
+    margin-top: 20px;
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.leaderboard-subtitle {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.time-range-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-range-btn {
+    padding: 8px 16px;
+    border: 2px solid #333;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: white;
+}
+
+.time-range-btn:hover {
+    border-color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.time-range-btn.active {
+    background: #4caf50;
+    color: white;
+    border-color: white;
+}
+
+.time-range-btn.focus {
+    outline: none;
+}
+
+.leaderboard-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4caf50, transparent);
+    margin: 25px 0;
+    opacity: 0.6;
+}
+
+.leaderboard-loading {
+    height: 150px;
+    /* 固定高度 */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 水平居中 */
+    color: white;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #333;
+    border-top: 4px solid #4caf50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+    /* 减少底部间距 */
+    /* 移除 margin-bottom: 50px */
+}
+
+.leaderboard-loading p {
+    /* 移除绝对定位，恢复正常文档流 */
+    position: static;
+    margin: 0;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.leaderboard-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+    /* 如果列表区域需要flex支持 */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.leaderboard-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaderboard-list::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 3px;
+}
+
+.leaderboard-list::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 3px;
+}
+
+.leaderboard-list::-webkit-scrollbar-thumb:hover {
+    background: #66bb6a;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.leaderboard-item:hover {
+    transform: translateX(8px);
+    background: rgba(76, 175, 80, 0.1);
+    border-color: #4caf50;
+}
+
+.leaderboard-item.podium {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4caf50;
+}
+
+.leaderboard-item.current-user {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4caf50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.leaderboard-rank {
+    flex: 0 0 60px;
+    text-align: center;
+}
+
+.rank-icon {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}
+
+.leaderboard-user-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #333;
+}
+
+.username {
+    font-weight: 600;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.you-badge {
+    background: #4caf50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.leaderboard-score {
+    text-align: right;
+    flex: 0 0 100px;
+}
+
+.score-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4caf50;
+    filter: drop-shadow(0 0 2px rgba(76, 175, 80, 0.5));
+}
+
+.score-label {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.no-data-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.no-data-message p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.leaderboard-actions {
+    margin-top: 20px;
+}
+
+.leaderboard-back-button {
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.leaderboard-back-button:hover {
+    background: #66bb6a;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.leaderboard-back-button:active {
+    transform: translateY(-2px);
+}
+
+.leaderboard-back-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+@keyframes leaderboardPopupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .leaderboard-container {
+        padding: 30px 20px;
+    }
+
+    .leaderboard-title {
+        font-size: 28px;
+    }
+
+    .leaderboard-item {
+        padding: 10px 12px;
+    }
+
+    .username {
+        font-size: 1rem;
+    }
+
+    .score-value {
+        font-size: 1.1rem;
+    }
+
+    .time-range-selector {
+        flex-wrap: wrap;
+    }
+
+    .time-range-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-container {
+        padding: 20px 15px;
+        width: 95%;
+    }
+
+    .leaderboard-title {
+        font-size: 24px;
+    }
+
+    .leaderboard-user-info {
+        gap: 8px;
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .username {
+        font-size: 0.9rem;
+    }
+
+    .leaderboard-score {
+        flex: 0 0 80px;
+    }
+
+    .score-value {
+        font-size: 1rem;
+    }
+}

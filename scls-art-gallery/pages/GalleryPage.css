@@ -1,0 +1,72 @@
+/* pages/GalleryPage.css */
+/* === 全局重置与基础（确保根节点占满视口） === */
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 让 body 成为一个水平居中容器（稳定且语义清晰） */
+body {
+    display: flex;
+    justify-content: center;
+    /* 水平把 .index-page 居中 */
+    align-items: flex-start;
+    /* 页面内容从上方向下排列；若想垂直居中可改成 center */
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+}
+
+/* === 页面主容器：不再使用 width:100% 填满，而是用 max-width + margin auto === */
+.index-page {
+    position: relative;
+    width: 100vw;
+    /* 横向自适应全屏 */
+    min-height: 100vh;
+    /* 纵向至少占满屏幕 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    color: white;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: transparent;
+}
+
+.full-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* 放到内容后面 */
+}
+
+.background-container {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    /* 背景最底层 */
+    overflow: hidden;
+}
+
+.gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.8) 0%,
+            /* 顶部深 */
+            rgba(0, 0, 0, 0.5) 50%,
+            /* 中间淡 */
+            rgba(0, 0, 0, 0.8) 100%
+            /* 底部深 */
+        );
+    pointer-events: none;
+}

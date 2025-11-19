@@ -1,0 +1,200 @@
+/* pages/drawGuess/WordSelection.css */
+.word-selection-page {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.word-selection-container {
+    background: black;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    width: 90%;
+    animation: wordSelectionPopupIn 0.6s ease-out forwards;
+}
+
+.word-selection-title {
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.word-selection-artist-badge {
+    background: #4caf50;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.word-selection-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.word-selection-option-button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+    animation: wordSelectionFadeIn 0.5s ease forwards;
+    opacity: 0;
+    transform: translateZ(0);
+    /* 开启硬件加速 */
+    will-change: transform, box-shadow;
+    /* 性能优化 */
+}
+
+.word-selection-option-button:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4caf50;
+    transform: translateY(-6px) scale(1.02);
+    /* 增加浮起高度和轻微缩放 */
+    box-shadow:
+        0 12px 25px rgba(76, 175, 80, 0.4),
+        0 8px 15px rgba(0, 0, 0, 0.1);
+    /* 多层阴影增强立体感 */
+}
+
+.word-selection-option-button:active {
+    transform: translateY(-2px) scale(0.98);
+    /* 按下时轻微下沉和缩小 */
+    box-shadow:
+        0 6px 15px rgba(76, 175, 80, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 减少阴影强度 */
+    transition: all 0.15s ease;
+    /* 按下时更快的过渡 */
+}
+
+.word-selection-option-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.word-selection-waiting-message {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 40px 0;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+.word-selection-timer-display {
+    color: #4caf50;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid #333;
+}
+
+@keyframes wordSelectionPopupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes wordSelectionFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 为按钮添加悬浮时的轻微脉动效果 */
+.word-selection-option-button:hover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    background: rgba(76, 175, 80, 0.1);
+    animation: buttonPulse 1.5s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .word-selection-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .word-selection-container {
+        padding: 30px 20px;
+    }
+
+    .word-selection-title {
+        font-size: 24px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* 移动端减少浮起高度 */
+    .word-selection-option-button:hover {
+        transform: translateY(-4px) scale(1.02);
+    }
+}

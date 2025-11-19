@@ -1,0 +1,486 @@
+/* components/ScrollMask.css */
+/* overlay */
+.scroll-mask-overlay {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    pointer-events: none;
+    transition: transform 0.25s ease-out;
+}
+
+.overlay-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+}
+
+.overlay-icon {
+    font-size: 60px;
+    opacity: 0.95;
+    margin-top: 220px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+    animation: sub-bounce 1.2s infinite ease-in-out;
+}
+
+.overlay-title {
+    margin: 0;
+    margin-top: -340px;
+    font-size: 60px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-weight: 460;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.overlay-sub-title {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    font-weight: 460;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.overlay-sub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+    animation: sub-bounce 1.2s infinite ease-in-out;
+}
+
+.overlay-hint {
+    margin-top: -10px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.overlay-arrow {
+    margin-top: -10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    animation: arrow-bounce 1.2s infinite ease-in-out;
+}
+
+/* 蒙版主体 */
+.scroll-mask {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    background: rgba(20, 20, 20, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45);
+    z-index: 500;
+    transition: height 0.25s ease-out;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-top: 1.2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* 内部滚动区 */
+.scroll-mask-content {
+    padding: 80px 18px 36px 18px;
+    color: #fff;
+    font-size: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: center;
+}
+
+.scroll-mask-title {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* ScrollMask 内容里的图片区域（居中 + 缩小宽度） */
+.image-grid {
+    width: 80%;
+    /* ✅ 或者写 1200px，取决于你想要的视觉效果 */
+    margin: 0 auto;
+    /* ✅ 自动左右居中 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* ✅ 2 列田字布局 */
+    gap: 30px;
+    /* ✅ 图片块之间的间距 */
+    padding: 40px 0;
+    /* ✅ 上下留白，好呼吸 */
+}
+
+.image-block {
+    position: relative;
+    /* ✅ 伪元素定位依赖 */
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 5;
+    /* 或者比 scroll-mask-content 高 */
+
+    /* ✅ block 自己不动 */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 上浅下深的渐变蒙版（覆盖在图片上） */
+.image-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* top:0; right:0; bottom:0; left:0; */
+    pointer-events: none;
+    /* 不阻塞交互 */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 20%,
+            rgba(0, 0, 0, 0.08) 50%,
+            rgba(0, 0, 0, 0.28) 100%);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 2;
+    /* 在图片之上 */
+}
+
+/* 纯色半透明边缘线（用于立体感） */
+.image-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    /* 跟随父圆角 */
+    /* 使用半透明纯色边线（白色偏绿你可以自行调整） */
+    border: 2.6px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) inset;
+    /* 内阴影增加厚度感（可选） */
+    transition: border-color 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    z-index: 3;
+    /* 在蒙版之上，保持清晰边缘 */
+}
+
+.image-block img {
+    position: relative;
+    /* 保证 z-index > 0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    /* ✅ 只对图片做动画 */
+    z-index: 1;
+    /* 在蒙版下方 */
+    display: block;
+    backface-visibility: hidden;
+    /* 有助于平滑动画 */
+    will-change: transform;
+}
+
+/* ✅ hover 时：图片放大，边框和阴影保持不变 */
+.image-block:hover img {
+    transform: scale(1.1);
+}
+
+/* ✅ 可以加一点光影提升质感（可选） */
+.image-block:hover {
+    transform: scale(1.014);
+    cursor: pointer;
+}
+
+/* hover 时：图片放大（你已有），我们提高边线的不透明度，增加立体感 */
+.image-block:hover::after {
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28) inset;
+}
+
+.scroll-mask-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+.gradient-left-line {
+    display: inline-block;
+    width: 200px;
+    /* 线长 */
+    height: 3px;
+    /* 线粗 */
+    background: linear-gradient(to left, #ffffff, rgba(0, 0, 0, 0));
+    vertical-align: 30%;
+    margin: 0 8px;
+    /* 线和文字的间距 */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.gradient-right-line {
+    display: inline-block;
+    width: 200px;
+    /* 线长 */
+    height: 3px;
+    /* 线粗 */
+    background: linear-gradient(to right, #ffffff, rgba(0, 0, 0, 0));
+    vertical-align: 30%;
+    margin: 0 8px;
+    /* 线和文字的间距 */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* 每个 block 内的文字容器 */
+.image-label {
+    position: absolute;
+    /* 绝对定位在 block 内 */
+    bottom: 0;
+    /* 靠底部 */
+    left: 0;
+    width: 100%;
+    padding: 22px 24px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    /* 底部渐变遮罩 */
+    color: #fff;
+    opacity: 1;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+    /* 避免遮挡鼠标事件 */
+    z-index: 6;
+    /* 文字在图片之上 */
+}
+
+/* 文字样式 */
+.image-label h4 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.image-label p {
+    margin: 2px 0 0 0;
+    font-size: 22px;
+    opacity: 0.85;
+    font-weight: 400;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.image-label-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    width: 66px;
+    /* 圆直径 */
+    height: 66px;
+    border-radius: 50%;
+    /* 圆形 */
+    background-color: rgba(255, 255, 255, 0.15);
+    /* 半透明背景 */
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    transition: transform 0.35s ease, background-color 0.35s ease;
+}
+
+.image-block:hover .image-label-icon {
+    transform: scale(1.02);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.emerging-text {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+    /* 避免挡住鼠标 */
+    z-index: 6;
+    /* 文字在图片之上 */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.image-block:hover .emerging-text {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* 移动设备优化 */
+.scroll-mask.mobile {
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-mask-content {
+    -webkit-overflow-scrolling: touch;
+    /* iOS 平滑滚动 */
+    scrollbar-width: thin;
+    /* Firefox 瘦滚动条 */
+}
+
+/* 移动设备上的滚动提示 */
+.mobile-close-hint {
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    color: #888;
+    font-size: 14px;
+    border-top: 1px solid #eee;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* 滚动状态动画 */
+.overlay-arrow.pulsing {
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+.scroll-mask-overlay.scrolling .overlay-arrow {
+    opacity: 0.7;
+}
+
+/* 控制提示 */
+.control-hints {
+    margin-top: 15px;
+}
+
+.hint-tip {
+    font-size: 12px;
+    color: #666;
+    opacity: 0.8;
+}
+
+/* 触摸设备优化 */
+@media (max-width: 768px) {
+    .scroll-mask-overlay.mobile .overlay-hint {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    .scroll-mask.mobile .scroll-mask-content {
+        padding-bottom: 20px;
+        /* 为移动设备提供更多滚动空间 */
+    }
+
+    .overlay-sub {
+        padding: 15px;
+    }
+}
+
+/* 游戏手柄和键盘导航焦点状态 */
+.scroll-mask:focus {
+    outline: 2px solid #4F46E5;
+    outline-offset: 2px;
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+
+    .overlay-hint,
+    .hint-tip {
+        color: #000;
+        font-weight: 600;
+    }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-mask {
+        transition: none;
+    }
+
+    .overlay-arrow.pulsing {
+        animation: none;
+    }
+}
+
+@keyframes sub-bounce {
+    0% {
+        transform: translateY(0);
+        opacity: .95
+    }
+
+    50% {
+        transform: translateY(2px);
+        opacity: 1
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: .95
+    }
+}
+
+@keyframes arrow-bounce {
+    0% {
+        transform: translateY(-6px);
+        opacity: .95
+    }
+
+    50% {
+        transform: translateY(12px);
+        opacity: 1
+    }
+
+    100% {
+        transform: translateY(-6px);
+        opacity: .95
+    }
+}
+
+/* responsive: 小屏两列依然可用，或改成单列（可改） */
+@media (max-width: 640px) {
+    .art-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .overlay-icon {
+        font-size: 22px;
+    }
+
+    .overlay-title {
+        font-size: 12px;
+    }
+}

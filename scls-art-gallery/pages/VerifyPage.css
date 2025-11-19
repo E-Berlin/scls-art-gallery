@@ -1,0 +1,155 @@
+/* pages/VerifyPage.css */
+.verify-page {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #000;
+}
+
+.background-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.background-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.2);
+    transform-origin: 50% 150px;
+    animation: bgZoomFadeIn 1.5s ease forwards;
+}
+
+.verify-container {
+    background: #000;
+    padding: 40px 30px;
+    border-radius: 12px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    animation: popupIn 0.6s ease-out forwards;
+}
+
+.verify-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation-delay: 0.1s;
+}
+
+.animated-button {
+    width: 100%;
+    /* 撑满 login-container */
+    display: block;
+    margin: 20px auto;
+    /* 上下间距 + 水平居中 */
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+    margin: 0 auto;
+    /* 外边距左右自动，块级元素才生效 */
+}
+
+/* 鼠标悬停：浮起 + 放大 */
+.animated-button:not(:disabled):hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 255, 128, 0.5);
+}
+
+/* 按下：挤压 + 高光 */
+.animated-button:not(:disabled):active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 4px 6px rgba(0, 255, 128, 0.3);
+    background-color: #45a049;
+}
+
+.animated-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.animated-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 爆弹入动画 */
+@keyframes popupIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- 新动画：每个子元素用自己的动画名，forwards 保持最终状态 ---------- */
+@keyframes fadeSlideIn {
+    0% {
+        transform: translateY(50px) scale(0.95);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(5px) scale(0.99);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* 子元素初始透明，使用 fadeSlideIn，并且 forwards 保持最终状态 */
+.verify-title,
+.verify-button {
+    opacity: 0;
+    animation-name: fadeSlideIn;
+    animation-duration: 0.58s;
+    animation-timing-function: cubic-bezier(.22, .9, .26, 1);
+    animation-fill-mode: forwards;
+    /* 很重要：动画结束后保持最后一帧 */
+}
+
+/* 顺序延迟（根据 DOM 顺序微调） */
+.verify-title {
+    animation-delay: 0.08s;
+}
+
+/* 按钮与 footer */
+.verify-button {
+    animation-delay: 0.18s;
+}

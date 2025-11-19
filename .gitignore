@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+scls-art-gallery/node_modules/
+
+# VSCode settings
+.vscode/
+
+# Environment files
+scls-art-gallery/.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (若有)
+dist/
+build/

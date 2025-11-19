@@ -1,0 +1,25 @@
+/* components/AnimatedButtonIndex.css */
+.animated-index-button {
+    padding: 12px 28px;
+    margin: 0 10px;
+    background-color: #4caf50;
+    /* 校徽绿色 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    outline: none;
+    /* 去掉默认白色边框 */
+}
+
+.animated-index-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.animated-index-button:active {
+    transform: translateY(0px) scale(0.97);
+}

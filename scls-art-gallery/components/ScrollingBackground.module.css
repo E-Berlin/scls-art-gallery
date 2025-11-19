@@ -1,0 +1,60 @@
+/* components/ScrollingBackground.module.css */
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    /* 添加以下属性确保 GPU 加速 */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+}
+
+.scrollWrapper {
+    display: flex;
+    width: 200vw;
+    height: 100%;
+    animation: scrollX 60s linear infinite;
+    /* 关键修复：确保动画在独立的合成层运行 */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.icon {
+    position: absolute;
+    animation: floatScale 3s ease-in-out infinite alternate;
+    /* 确保图标也在 GPU 层运行 */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 优化动画性能 */
+@keyframes scrollX {
+    0% {
+        transform: translateX(0) translateZ(0);
+    }
+
+    100% {
+        transform: translateX(-100vw) translateZ(0);
+    }
+}
+
+@keyframes floatScale {
+    0% {
+        transform: translateY(0) scale(1) translateZ(0);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.05) translateZ(0);
+    }
+
+    100% {
+        transform: translateY(5px) scale(0.95) translateZ(0);
+    }
+}
