@@ -10,7 +10,6 @@ interface RouteGuardProps {
 
 export const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     const location = useLocation();
-    const navigate = useNavigate();
     const { drawGuessSocket } = useSocket();
     const { user } = useUser();
     const params = useParams();
