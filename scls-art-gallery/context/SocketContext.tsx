@@ -1,7 +1,7 @@
 // context/SocketContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { SERVER_URL } from "../config/config";
+import { SERVER_URL } from "../src/config";
 
 interface SocketContextType {
     drawGuessSocket: Socket | null;

@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Brush, Eraser, Hand, Users, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { SERVER_URL } from "../config/config";
+import { SERVER_URL } from "../src/config";
 import { io, Socket } from "socket.io-client";
 import "./CollectiveCanvasPage.css";
 

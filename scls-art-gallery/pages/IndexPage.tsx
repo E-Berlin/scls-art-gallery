@@ -1,7 +1,7 @@
 // pages/IndexPage.tsx
 import React, { useRef, useEffect, useState } from "react";
 import { usePageTransition } from "../context/PageTransitionContext";
-import { SUPABASE_URL } from "../config/config"
+import { SUPABASE_URL } from "../src/config"
 import FadeInImage from "../components/FadeInImage";
 import AnimatedButtonIndex from "../components/AnimatedButtonIndex";
 import OrbitAroundLogo from "../components/OrbitAroundLogo";

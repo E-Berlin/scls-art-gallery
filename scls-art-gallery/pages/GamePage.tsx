@@ -6,7 +6,7 @@ import { MdGroups } from "react-icons/md";
 import { motion, type Variants } from "framer-motion";
 import { usePageTransition } from "../context/PageTransitionContext";
 import { useUser } from "../context/UserContext";
-import { SUPABASE_URL } from "../config/config"
+import { SUPABASE_URL } from "../src/config"
 import BackgroundSlider from "../components/BackgroundSlider";
 import ScrollMask from "../components/ScrollMask";
 import "./GamePage.css";

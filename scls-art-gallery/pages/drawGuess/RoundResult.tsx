@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePageTransition } from "../../context/PageTransitionContext";
 import { useSocket } from "../../context/SocketContext";
-import { SERVER_URL, SUPABASE_URL } from "../../config/config";
+import { SERVER_URL, SUPABASE_URL } from "../../src/config";
 import { ScrollingBackground } from "../../components/ScrollingBackground";
 import { useUser } from "../../context/UserContext";
 import axios from "axios";

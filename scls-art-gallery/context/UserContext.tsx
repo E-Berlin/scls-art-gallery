@@ -1,6 +1,6 @@
 // context/UserContext.tsx
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { SERVER_URL } from "../config/config";
+import { SERVER_URL } from "../src/config";
 
 interface User {
     id: string;

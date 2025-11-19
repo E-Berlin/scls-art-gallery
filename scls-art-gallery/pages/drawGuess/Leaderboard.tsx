@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { usePageTransition } from "../../context/PageTransitionContext";
 import { useUser } from "../../context/UserContext";
-import { SERVER_URL } from "../../config/config";
+import { SERVER_URL } from "../../src/config";
 import { ScrollingBackground } from "../../components/ScrollingBackground";
 import "./Leaderboard.css";
 

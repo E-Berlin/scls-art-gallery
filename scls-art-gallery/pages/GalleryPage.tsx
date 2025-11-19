@@ -4,7 +4,7 @@ import ScrollMask from "../components/ScrollMask";
 import { FaImages, FaCamera, FaRegImage, FaPalette, FaPenFancy, FaFeatherAlt, FaLayerGroup } from "react-icons/fa";
 import { usePageTransition } from "../context/PageTransitionContext";
 import { motion, type Variants } from "framer-motion";
-import { SUPABASE_URL } from "../config/config"
+import { SUPABASE_URL } from "../src/config"
 import "./GalleryPage.css";
 
 const bgImages = [

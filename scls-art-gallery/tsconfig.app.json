@@ -32,12 +32,11 @@
     "src",
     "components",
     "pages",
-    "config/env.js",
-    "config/config.ts",
-    "config/vite-env.d.ts",
+    "src/env.js",
+    "src/config.ts",
+    "src/vite-env.d.ts",
     "context/UserContext.tsx",
     "context/PageTransitionContext.tsx",
     "context/PlayerListContext.tsx",
-    "vite-env.d.ts" // 添加这一行
   ]
 }

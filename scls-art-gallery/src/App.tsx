@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { PageTransitionProvider } from "../context/PageTransitionContext";
 import { UserProvider } from "../context/UserContext";
 import { SocketProvider } from "../context/SocketContext";
-import { SUPABASE_URL } from "../config/config"
+import { SUPABASE_URL } from "./config"
 import Navbar from "../components/Navbar";
 import IndexPage from "../pages/IndexPage";
 import ArtGalleryPage from "../pages/GalleryPage";

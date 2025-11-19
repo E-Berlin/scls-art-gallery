@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Brush, Eraser, Hand, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { SERVER_URL, SUPABASE_URL } from "../../config/config";
+import { SERVER_URL, SUPABASE_URL } from "../../src/config";
 import { useSocket } from "../../context/SocketContext";
 import { useUser } from "../../context/UserContext";
 import axios from "axios";

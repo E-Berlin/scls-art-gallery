@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
-import { SERVER_URL } from "../config/config";
+import { SERVER_URL } from "../src/config";
 import { useUser } from "../context/UserContext";
 import ArtworkOverlay from "../components/ArtworkOverlay";
 import "./CollectionPage.css";

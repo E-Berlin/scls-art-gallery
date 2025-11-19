@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { usePageTransition } from "../context/PageTransitionContext";
-import { SUPABASE_URL } from "../config/config";
+import { SUPABASE_URL } from "../src/config";
 import AnimatedButton from "../components/AnimatedButton";
 import "./VerifyPage.css";
 

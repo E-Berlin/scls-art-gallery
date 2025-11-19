@@ -1,5 +1,5 @@
 // server/index.js
-const { SERVER_URL, FRONTEND_URL, PORT, ADMIN_KEY, SUPABASE_URL, SUPABASE_KEY } = require('../config/env');
+const { SERVER_URL, FRONTEND_URL, PORT, ADMIN_KEY, SUPABASE_URL, SUPABASE_KEY } = require('../src/env');
 const { sendVerificationEmail } = require("./mailer");
 const { createClient } = require('@supabase/supabase-js')
 const { Server } = require("socket.io");

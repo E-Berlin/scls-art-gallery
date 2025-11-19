@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { usePageTransition } from "../context/PageTransitionContext";
 import { useUser } from "../context/UserContext";
-import { SERVER_URL, SUPABASE_URL } from "../config/config";
+import { SERVER_URL, SUPABASE_URL } from "../src/config";
 import AnimatedButton from "../components/AnimatedButton";
 import "./ProfilePage.css";
 
