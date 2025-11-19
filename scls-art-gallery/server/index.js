@@ -2876,7 +2876,7 @@ app.get("/api/review/previous/:currentId", async (req, res) => {
 });
 
 // ========== 启动服务器 ==========
-server.listen(PORT, async () => {
+server.listen(PORT, '0.0.0.0', async () => {
     try {
         console.log(`🚀 Server starting on ${SERVER_URL}...`);
         await initializeServer();
